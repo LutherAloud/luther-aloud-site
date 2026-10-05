@@ -50,15 +50,28 @@
     return wrap;
   }
 
-  function renderLiveCard(entry, youtubeUrl) {
+  function renderWideCard(entry, mode) {
+    // mode === "live"       — a single video is published, fully available
+    // mode === "in-progress" — a serialized work with some parts published
+    var youtubeUrl = entry.youtube_url;
     var card = el("a", {
-      cls: "card card-live",
+      cls: "card card-live" + (mode === "in-progress" ? " card-in-progress" : ""),
       attrs: { href: youtubeUrl || "https://youtube.com/@LutherAloud", rel: "noopener" }
     });
 
     var thumb = el("div", { cls: "card-live-thumb" });
     var vid = youTubeId(youtubeUrl);
-    if (vid) {
+    if (entry.thumbnail) {
+      // Explicit cover wins — a bespoke image set in the entry.
+      var imgCover = el("img", {
+        attrs: {
+          src: entry.thumbnail,
+          alt: "Cover — " + entry.title,
+          loading: "lazy"
+        }
+      });
+      thumb.appendChild(imgCover);
+    } else if (vid) {
       var img = el("img", {
         attrs: {
           src: "https://i.ytimg.com/vi/" + vid + "/hqdefault.jpg",
@@ -67,24 +80,14 @@
         }
       });
       thumb.appendChild(img);
-    } else if (entry.thumbnail) {
-      var img2 = el("img", {
-        attrs: {
-          src: entry.thumbnail,
-          alt: "Cover — " + entry.title,
-          loading: "lazy",
-          onerror: "this.style.display='none'"
-        }
-      });
-      thumb.appendChild(img2);
-      thumb.appendChild(el("span", { text: entry.title }));
     } else {
       thumb.appendChild(el("span", { text: "▶ " + entry.title }));
     }
     card.appendChild(thumb);
 
     var body = el("div", { cls: "card-live-body" });
-    body.appendChild(el("span", { cls: "card-live-tag", text: "Episode " + entry.num }));
+    var tagNum = entry.episode_number != null ? entry.episode_number : entry.num;
+    body.appendChild(el("span", { cls: "card-live-tag", text: "Episode " + tagNum }));
     body.appendChild(el("h4", { text: entry.title }));
     if (entry.subtitle) body.appendChild(el("p", { cls: "card-live-sub", text: entry.subtitle }));
 
@@ -93,8 +96,35 @@
       var metaLine = el("p", { cls: "card-live-meta", text: metaBits.join(" · ") });
       body.appendChild(metaLine);
     }
-    var btn = el("span", { cls: "btn btn-primary", text: "Watch the video ↗" });
-    body.appendChild(btn);
+
+    if (mode === "in-progress") {
+      var published = Math.max(0, Math.min(entry.parts_published || 0, entry.parts_total || 0));
+      var total = Math.max(1, entry.parts_total || 1);
+      var pct = Math.round((published / total) * 100);
+      var progress = el("div", { cls: "card-progress" });
+      var bar = el("div", { cls: "card-progress-bar", attrs: {
+        role: "progressbar",
+        "aria-valuemin": "0",
+        "aria-valuemax": String(total),
+        "aria-valuenow": String(published),
+        "aria-label": published + " of " + total + " videos published"
+      }});
+      var fill = el("div", { cls: "card-progress-fill" });
+      fill.style.width = pct + "%";
+      bar.appendChild(fill);
+      progress.appendChild(bar);
+      progress.appendChild(el("p", {
+        cls: "card-progress-text",
+        text: published + " of " + total + " videos published"
+      }));
+      if (entry.cadence) {
+        progress.appendChild(el("p", { cls: "card-progress-cadence", text: entry.cadence }));
+      }
+      body.appendChild(progress);
+    }
+
+    var btnText = mode === "in-progress" ? "Watch the playlist ↗" : "Watch the video ↗";
+    body.appendChild(el("span", { cls: "btn btn-primary", text: btnText }));
     card.appendChild(body);
     return card;
   }
@@ -130,7 +160,7 @@
     if (!root) return;
     root.innerHTML = "";
 
-    var totalLive = 0, totalPlanned = 0, totalPlannedEps = 0;
+    var totalAvailable = 0, totalPlanned = 0, totalComingSoon = 0;
 
     data.phases.forEach(function (phase) {
       var pWrap = el("section", { cls: "phase", attrs: { id: phase.id } });
@@ -152,12 +182,19 @@
         var cards = el("div", { cls: "cards" });
         group.entries.forEach(function (entry) {
           if (entry.status === "live") {
-            cards.appendChild(renderLiveCard(entry, entry.youtube_url));
-            totalLive += 1;
+            cards.appendChild(renderWideCard(entry, "live"));
+            totalAvailable += 1;
+          } else if (entry.status === "in-progress") {
+            cards.appendChild(renderWideCard(entry, "in-progress"));
+            var pub = Math.max(0, Math.min(entry.parts_published || 0, entry.parts_total || 0));
+            var tot = Math.max(1, entry.parts_total || 1);
+            totalAvailable += pub;
+            totalPlanned += 1;        // the work itself still isn't complete
+            totalComingSoon += (tot - pub);
           } else {
             cards.appendChild(renderRegularCard(entry));
             totalPlanned += 1;
-            totalPlannedEps += (entry.estimated_episodes || 1);
+            totalComingSoon += (entry.estimated_episodes || 1);
           }
         });
         gWrap.appendChild(cards);
@@ -169,11 +206,10 @@
 
     var totalsEl = document.getElementById("roadmap-totals");
     if (totalsEl) {
-      var grand = totalLive + totalPlannedEps;
       totalsEl.innerHTML =
-        "<strong>" + totalLive + "</strong> available · " +
+        "<strong>" + totalAvailable + "</strong> available · " +
         "<strong>" + totalPlanned + "</strong> works planned · " +
-        "<strong>≈ " + grand + "</strong> episodes coming soon.";
+        "<strong>≈ " + totalComingSoon + "</strong> episodes coming soon.";
     }
   }
 

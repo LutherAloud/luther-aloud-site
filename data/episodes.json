@@ -24,7 +24,7 @@
             { "num": 4, "title": "A Treatise Concerning the Blessed Sacrament and Concerning the Brotherhoods", "year": 1519, "vol": "II", "estimated_length": "~45 min", "status": "coming-soon" },
             { "num": 5, "title": "Discussion of Confession", "year": 1520, "vol": "I", "estimated_length": "~30 min", "status": "coming-soon" },
             { "num": 6, "title": "The Fourteen of Consolation", "year": 1520, "vol": "I", "estimated_length": "~1.5 hr", "status": "coming-soon" },
-            { "num": 7, "title": "Treatise on Good Works", "year": 1520, "vol": "I", "estimated_length": "~2.5 hr", "status": "coming-soon" },
+            { "num": 7, "episode_number": 2, "title": "A Treatise on Good Works", "year": 1520, "vol": "I", "status": "in-progress", "youtube_url": "https://www.youtube.com/playlist?list=PLC8d1nYZiD6o", "thumbnail": "assets/cover-good-works.jpg", "parts_published": 1, "parts_total": 11, "cadence": "a new one every ~2 weeks" },
             { "num": 8, "title": "Treatise on the New Testament (On the Holy Mass)", "year": 1520, "vol": "I", "estimated_length": "~1 hr", "status": "coming-soon" },
             { "num": 9, "title": "The Papacy at Rome", "year": 1520, "vol": "I", "estimated_length": "~1.5 hr", "status": "coming-soon" },
             { "num": 10, "title": "A Treatise Concerning the Ban", "year": 1520, "vol": "II", "estimated_length": "~30 min", "status": "coming-soon" },
