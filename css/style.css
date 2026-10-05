@@ -504,13 +504,6 @@ h3 { font-size: 1.15rem; line-height: 1.25; letter-spacing: 0.02em; }
   color: var(--parchment);
   margin: 0.45rem 0 0;
 }
-.card-progress-cadence {
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  color: var(--ink-mute);
-  font-style: italic;
-  margin: 0.15rem 0 0;
-}
 
 /* coming-soon = dimmed, uniform height */
 .card-soon {

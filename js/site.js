@@ -117,9 +117,6 @@
         cls: "card-progress-text",
         text: published + " of " + total + " videos published"
       }));
-      if (entry.cadence) {
-        progress.appendChild(el("p", { cls: "card-progress-cadence", text: entry.cadence }));
-      }
       body.appendChild(progress);
     }
 
