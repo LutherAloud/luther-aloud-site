@@ -86,8 +86,6 @@
     card.appendChild(thumb);
 
     var body = el("div", { cls: "card-live-body" });
-    var tagNum = entry.episode_number != null ? entry.episode_number : entry.num;
-    body.appendChild(el("span", { cls: "card-live-tag", text: "Episode " + tagNum }));
     body.appendChild(el("h4", { text: entry.title }));
     if (entry.subtitle) body.appendChild(el("p", { cls: "card-live-sub", text: entry.subtitle }));
 
@@ -128,11 +126,6 @@
 
   function renderRegularCard(entry) {
     var card = el("div", { cls: "card card-soon" });
-
-    card.appendChild(el("div", {
-      cls: "card-num",
-      text: "№ " + entry.num
-    }));
 
     card.appendChild(el("h4", { cls: "card-title", text: entry.title }));
     if (entry.subtitle) card.appendChild(el("p", { cls: "card-subtitle", text: entry.subtitle }));
