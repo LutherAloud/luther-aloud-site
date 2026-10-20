@@ -23,7 +23,7 @@
             { "num": 3, "title": "A Treatise Concerning the Blessed Sacrament and Concerning the Brotherhoods", "year": "late 1519", "vol": "II", "estimated_length": "~45 min", "status": "coming-soon" },
             { "num": 4, "title": "A Brief Explanation of the Ten Commandments, the Creed, and the Lord's Prayer", "year": "Jan 1520", "vol": "II", "estimated_length": "~1.5 hr", "status": "coming-soon" },
             { "num": 5, "title": "Discussion of Confession", "year": "Apr 1520", "vol": "I", "estimated_length": "~30 min", "status": "coming-soon" },
-            { "num": 6, "episode_number": 2, "title": "A Treatise on Good Works", "year": "May 1520", "vol": "I", "status": "in-progress", "youtube_url": "https://www.youtube.com/playlist?list=PLC8d1nYZiD6o", "thumbnail": "assets/cover-good-works.jpg", "parts_published": 2, "parts_total": 11 },
+            { "num": 6, "episode_number": 2, "title": "A Treatise on Good Works", "year": "May 1520", "vol": "I", "status": "in-progress", "youtube_url": "https://www.youtube.com/playlist?list=PLC8d1nYZiD6o", "thumbnail": "assets/cover-good-works.jpg", "parts_published": 3, "parts_total": 11 },
             { "num": 7, "title": "The Papacy at Rome", "year": "Jun 1520", "vol": "I", "estimated_length": "~1.5 hr", "status": "coming-soon" },
             { "num": 8, "title": "Treatise on the New Testament (On the Holy Mass)", "year": "Aug 1520", "vol": "I", "estimated_length": "~1 hr", "status": "coming-soon" },
             { "num": 9, "title": "An Open Letter to the Christian Nobility of the German Nation", "year": "Aug 1520", "vol": "II", "estimated_length": "~2.5 hr", "status": "coming-soon" },
