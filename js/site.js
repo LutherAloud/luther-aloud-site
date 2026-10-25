@@ -56,7 +56,11 @@
     var youtubeUrl = entry.youtube_url;
     var card = el("a", {
       cls: "card card-live" + (mode === "in-progress" ? " card-in-progress" : ""),
-      attrs: { href: youtubeUrl || "https://youtube.com/@LutherAloud", rel: "noopener" }
+      attrs: {
+        href: youtubeUrl || "https://youtube.com/@LutherAloud",
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }
     });
 
     var thumb = el("div", { cls: "card-live-thumb" });
