@@ -122,7 +122,11 @@
       body.appendChild(progress);
     }
 
-    var btnText = mode === "in-progress" ? "Watch the playlist ↗" : "Watch the video ↗";
+    // A playlist URL always opens the playlist, whether the series is
+    // still releasing (in-progress) or complete (live). A single-video
+    // URL opens that one video.
+    var isPlaylist = /[?&]list=|\/playlist\?/.test(youtubeUrl || "");
+    var btnText = isPlaylist ? "Watch the playlist ↗" : "Watch the video ↗";
     body.appendChild(el("span", { cls: "btn btn-primary", text: btnText }));
     card.appendChild(body);
     return card;
@@ -177,7 +181,10 @@
         group.entries.forEach(function (entry) {
           if (entry.status === "live") {
             cards.appendChild(renderWideCard(entry, "live"));
-            totalAvailable += 1;
+            // A single-video entry is one piece; a complete playlist
+            // entry counts the videos it holds, so the "available"
+            // tally is videos a visitor can watch, not works.
+            totalAvailable += (entry.parts_total || 1);
           } else if (entry.status === "in-progress") {
             cards.appendChild(renderWideCard(entry, "in-progress"));
             var pub = Math.max(0, Math.min(entry.parts_published || 0, entry.parts_total || 0));
