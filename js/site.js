@@ -79,7 +79,7 @@
       var img = el("img", {
         attrs: {
           src: "https://i.ytimg.com/vi/" + vid + "/hqdefault.jpg",
-          alt: "YouTube thumbnail — " + entry.title,
+          alt: "Thumbnail — " + entry.title,
           loading: "lazy"
         }
       });
