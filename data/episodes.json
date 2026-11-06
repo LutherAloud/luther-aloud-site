@@ -26,7 +26,7 @@
             { "num": 7, "title": "The Papacy at Rome", "year": "Jun 1520", "vol": "I", "estimated_length": "~1.5 hr", "status": "coming-soon" },
             { "num": 8, "title": "Treatise on the New Testament (On the Holy Mass)", "year": "Aug 1520", "vol": "I", "estimated_length": "~1 hr", "status": "coming-soon" },
             { "num": 9, "title": "An Open Letter to the Christian Nobility of the German Nation", "year": "Aug 1520", "vol": "II", "estimated_length": "~2.5 hr", "status": "coming-soon" },
-            { "num": 10, "title": "The Fourteen of Consolation", "year": "Sep 1520", "vol": "I", "status": "in-progress", "youtube_url": "https://www.youtube.com/playlist?list=PLOnemTVydpDA", "thumbnail": "assets/cover-fourteen-of-consolation.jpg", "parts_published": 1, "parts_total": 2 },
+            { "num": 10, "title": "The Fourteen of Consolation", "year": "Sep 1520", "vol": "I", "duration": "2 videos", "status": "live", "youtube_url": "https://www.youtube.com/playlist?list=PLOnemTVydpDA", "thumbnail": "assets/cover-fourteen-of-consolation.jpg", "parts_total": 2 },
             { "num": 11, "title": "The Babylonian Captivity of the Church", "year": "Oct 1520", "vol": "II", "estimated_length": "~2.5 hr", "status": "coming-soon" },
             { "num": 12, "title": "A Treatise on Christian Liberty (The Freedom of a Christian)", "year": "Nov 1520", "vol": "II", "estimated_length": "~1 hr", "status": "coming-soon" },
             { "num": 13, "title": "A Treatise Concerning the Ban", "year": "late 1520", "vol": "II", "estimated_length": "~30 min", "status": "coming-soon" },
