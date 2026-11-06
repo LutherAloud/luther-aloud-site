@@ -318,6 +318,9 @@
     stampYear();
     initNavMenu();
     initBackToTop();
+    // Only the roadmap page carries #roadmap-list; skip the fetch on
+    // other pages (privacy, etc.) so site.js is safe to reuse everywhere.
+    if (!document.getElementById("roadmap-list")) return;
     fetch(DATA_URL, { cache: "no-cache" })
       .then(function (r) {
         if (!r.ok) throw new Error("Failed to load episodes.json (HTTP " + r.status + ")");
