@@ -30,7 +30,7 @@
             { "num": 11, "title": "The Babylonian Captivity of the Church", "year": "Oct 1520", "vol": "II", "estimated_length": "~2.5 hr", "status": "coming-soon" },
             { "num": 12, "title": "A Treatise on Christian Liberty (The Freedom of a Christian)", "year": "Nov 1520", "vol": "II", "estimated_length": "~1 hr", "status": "coming-soon" },
             { "num": 13, "title": "A Treatise Concerning the Ban", "year": "late 1520", "vol": "II", "estimated_length": "~30 min", "status": "coming-soon" },
-            { "num": 14, "title": "Sermons (as included in Vol. II)", "year": "1520–21", "vol": "II", "estimated_length": "~1 hr", "status": "coming-soon" },
+            { "num": 14, "title": "The Eight Wittenberg Sermons", "year": "Mar 1522", "vol": "II", "estimated_length": "~2 hr", "estimated_episodes": 8, "status": "coming-soon" },
             { "num": 15, "title": "The Doctrines of Men (On Avoiding the Doctrines of Men)", "year": 1522, "vol": "II", "estimated_length": "~30 min", "status": "coming-soon" },
             { "num": 16, "title": "Luther's Prefaces to His Works", "year": "1539/1545", "vol": "I", "estimated_length": "~30 min", "status": "coming-soon" }
           ]
