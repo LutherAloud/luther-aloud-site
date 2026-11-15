@@ -1,9 +1,30 @@
 # Luther Aloud site — operating notes for Claude
 
-## Episode cover conversion (color-faithful)
+## Making a cover for a new card
 
-When the user attaches an `episode cover.png` to flip a Coming Soon card to
-Live, convert it through `scripts/convert-cover.py`:
+Every new single-episode card AND every new playlist card gets its cover
+rendered here, from the shared HTML template. The user does not attach
+cover PNGs any more.
+
+The flow has two steps.
+
+### 1. Render the PNG from the template
+
+Start from `scripts/cover-template.html`. Substitute the two placeholders:
+
+- `__TITLE__` — the work's English title, e.g. `A Treatise on Good Works`.
+  Capitalised exactly as it appears on the roadmap card; the template
+  handles the line break at 140px / `padding: 0 180px`.
+- `__YEAR__` — the year on the byline, e.g. `1520` or `1517`. Single year
+  only — the byline reads `Martin Luther · <year>`.
+
+Render the substituted HTML at exactly `1920 × 1080` with Playwright (or
+any headless Chromium) and save the screenshot as a PNG. The background
+is `#3E1014`, the gold rule and wordmark are `#C9A227`, the title is
+`#F4EBD8`, and the font is Cormorant Garamond — the template loads it from
+Google Fonts, so wait for `document.fonts.ready` before the screenshot.
+
+### 2. Convert and check
 
 ```
 scripts/convert-cover.py SRC.png assets/cover-<slug>.jpg
@@ -17,28 +38,28 @@ Pillow cannot be loaded. Same color math either way.
 
 After writing the JPEG the script samples four points inside the oxblood
 field — (15,15), (640,80), (100,400), (1200,700) — and exits non-zero if
-any channel is more than one step off `#3E1014`. That is the oxblood used
-by the site CSS, the pipeline's cover template, and the playlist covers I
-generate from HTML; keeping every cover within one step of it is what
-stops the roadmap grid from drifting between warmer and cooler reds.
+any channel is more than one step off `#3E1014`. That's the oxblood used
+by the site CSS and the cover template; keeping every cover within one
+step of it is what stops the roadmap grid from drifting between warmer
+and cooler reds. Treat a non-zero exit as a blocker, not a warning — do
+not commit the JPEG until the check is green.
 
-Older `ffmpeg`-based conversions landed at `#3C0E11` — two steps darker
-per channel. If a cover already in `assets/` samples outside tolerance,
-regenerate it from the source PNG with this script rather than nudging
-the on-site display.
+An older `ffmpeg`-based conversion landed at `#3C0E11`, two steps darker.
+If a cover currently in `assets/` samples outside tolerance, regenerate
+it from the template with this flow rather than nudging the on-site
+display. **Existing cards stay as they are** unless the user asks for a
+specific one to be redone; policy changes do not trigger retroactive
+regeneration.
 
-## Where covers come from
+## What kind of card uses what
 
-- **Episode covers** (`cover-ban.jpg`, `cover-baptism.jpg`,
-  `cover-blessed-sacrament.jpg`, `cover-brief-explanation.jpg`,
-  `cover-confession.jpg`) — the user attaches each PNG; convert with the
-  script above.
-- **Playlist covers** (`cover-fourteen-of-consolation.jpg`,
-  `cover-good-works.jpg`, `cover-new-testament.jpg`,
-  `cover-papacy-at-rome.jpg`) — rendered from a shared HTML template via
-  Playwright at 1920×1080 against `background: #3E1014`, then put through
-  the same `scripts/convert-cover.py` so the oxblood check runs on them
-  too.
+- **Single-episode card** (one video, one card) → render one cover from
+  the template with that episode's title and year.
+- **Multi-part work** (serialised across a YouTube playlist) → one
+  playlist card, one cover from the template with the work's title and
+  the year of the first part. Do not render per-part covers for the site.
+- **Coming Soon card** → no cover; those render as text-only tiles with
+  the dimmer `.card-soon` styling in `css/style.css`.
 
 ## Pushing changes
 

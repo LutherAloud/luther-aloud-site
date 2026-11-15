@@ -1,0 +1,90 @@
+<!doctype html>
+<!--
+  Single-episode / playlist cover template for Luther Aloud.
+  Render at 1920x1080, then put the PNG through scripts/convert-cover.py
+  (which emits a 1280x720 sRGB JPEG and runs the oxblood check).
+
+  Substitute the two placeholders before rendering:
+    __TITLE__   — e.g. "A Treatise on Good Works"
+    __YEAR__    — e.g. "1520" or "1517"
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 1920px;
+    height: 1080px;
+    background: #3E1014;
+    overflow: hidden;
+  }
+  .frame {
+    position: absolute;
+    top: 42px; left: 42px; right: 42px; bottom: 42px;
+    border: 6px solid #C9A227;
+  }
+  .stack {
+    position: absolute;
+    left: 0; right: 0;
+    text-align: center;
+  }
+  .title {
+    top: 47%;
+    transform: translateY(-50%);
+  }
+  .title h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    color: #F4EBD8;
+    font-size: 140px;
+    line-height: 1.08;
+    margin: 0;
+    padding: 0 180px;
+    letter-spacing: 0.005em;
+  }
+  .title .byline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    color: #C9A227;
+    font-size: 60px;
+    margin-top: 36px;
+    letter-spacing: 0.04em;
+  }
+  .mark {
+    bottom: 88px;
+  }
+  .mark .rule {
+    display: inline-block;
+    width: 140px;
+    height: 2px;
+    background: #C9A227;
+    vertical-align: middle;
+    margin-bottom: 14px;
+  }
+  .mark .wordmark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    color: #C9A227;
+    font-size: 34px;
+    letter-spacing: 0.4em;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<div class="stack title">
+  <h1>__TITLE__</h1>
+  <div class="byline">Martin Luther &nbsp;·&nbsp; __YEAR__</div>
+</div>
+<div class="stack mark">
+  <div class="rule"></div>
+  <div class="wordmark">LUTHER ALOUD</div>
+</div>
+</body>
+</html>
